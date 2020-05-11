@@ -45,15 +45,13 @@ public class Utility implements IUtility {
 	public void printPrimes(int[] primes) {
 		final int RR = 50;
 		final int CC = 4;
-
 		int totalPrimes = primes.length - 1;
+
 		int PAGENUMBER;
-		int PAGEOFFSET;
 		int ROWOFFSET;
 		int C;
 		PAGENUMBER = 1;
-		PAGEOFFSET = 1;
-		while (PAGEOFFSET <= totalPrimes) {
+		for (int PAGEOFFSET = 1; PAGEOFFSET <= totalPrimes; PAGEOFFSET += RR * CC) {
 			System.out.print("The First ");
 			System.out.print(Integer.toString(totalPrimes));
 			System.out.print(" Prime Numbers === Page ");
@@ -69,7 +67,6 @@ public class Utility implements IUtility {
 			}
 			System.out.println("\f");
 			PAGENUMBER++;
-			PAGEOFFSET += RR * CC;
 		}
 	}
 }
