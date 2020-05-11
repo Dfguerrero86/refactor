@@ -1,43 +1,48 @@
 public class Utility implements IUtility {
 	@Override
 	public int[] generatePrimes(int totalPrimes) {
-		int P[] = new int[totalPrimes + 1];
+		int primes[] = new int[totalPrimes + 1];
 		int ORDMAX = 30;
 		int MULT[] = new int[ORDMAX + 1];
 
 		int J;
-		int K;
-		boolean JPRIME;
+		int countPrime;
+		boolean isPrime;
 		int ORD;
 		int SQUARE;
 		J = 1;
-		K = 1;
-		P[1] = 2;
+		countPrime = 1;
+		primes[1] = 2;
 		ORD = 2;
 		SQUARE = 9;
-		while (K < totalPrimes) {
+		while (countPrime < totalPrimes) {
 			do {
 				J += 2;
 				if (J == SQUARE) {
 					ORD++;
-					SQUARE = P[ORD] * P[ORD];
+					SQUARE = primes[ORD] * primes[ORD];
 					MULT[ORD - 1] = J;
 				}
-				JPRIME = true;
-				for (int N = 2; N < ORD && JPRIME; N++) {
-					while (MULT[N] < J) {
-						MULT[N] += P[N] + P[N];
-					}
-					if (MULT[N] == J) {
-						JPRIME = false;
-						break;
-					}
-				}
-			} while (!JPRIME);
-			K++;
-			P[K] = J;
+				isPrime = true;
+				isPrime = validatePrime(primes, MULT, J, isPrime, ORD);
+			} while (!isPrime);
+			countPrime++;
+			primes[countPrime] = J;
 		}
-		return P;
+		return primes;
+	}
+
+	private boolean validatePrime(int[] primes, int[] MULT, int J, boolean isPrime, int ORD) {
+		for (int N = 2; N < ORD && isPrime; N++) {
+			while (MULT[N] < J) {
+				MULT[N] += primes[N] + primes[N];
+			}
+			if (MULT[N] == J) {
+				isPrime = false;
+				break;
+			}
+		}
+		return isPrime;
 	}
 
 	@Override
