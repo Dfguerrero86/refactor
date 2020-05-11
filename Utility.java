@@ -3,13 +3,13 @@ public class Utility implements IUtility {
 	public int[] generatePrimes(int totalPrimes) {
 		int P[] = new int[totalPrimes + 1];
 		int ORDMAX = 30;
+		int MULT[] = new int[ORDMAX + 1];
+
 		int J;
 		int K;
 		boolean JPRIME;
 		int ORD;
 		int SQUARE;
-		int N = 0;
-		int MULT[] = new int[ORDMAX + 1];
 		J = 1;
 		K = 1;
 		P[1] = 2;
@@ -23,16 +23,15 @@ public class Utility implements IUtility {
 					SQUARE = P[ORD] * P[ORD];
 					MULT[ORD - 1] = J;
 				}
-				N = 2;
 				JPRIME = true;
-				while (N < ORD && JPRIME) {
+				for (int N = 2; N < ORD && JPRIME; N++) {
 					while (MULT[N] < J) {
 						MULT[N] += P[N] + P[N];
 					}
 					if (MULT[N] == J) {
 						JPRIME = false;
+						break;
 					}
-					N++;
 				}
 			} while (!JPRIME);
 			K++;
