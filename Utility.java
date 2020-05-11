@@ -1,4 +1,5 @@
-public class Utility {
+public class Utility implements IUtility {
+	@Override
 	public int[] generatePrimes(int totalPrimes) {
 		int P[] = new int[totalPrimes + 1];
 		int ORDMAX = 30;
@@ -38,6 +39,7 @@ public class Utility {
 		return P;
 	}
 
+	@Override
 	public void printPrimes(int[] primes) {
 		final int RR = 50;
 		final int CC = 4;
