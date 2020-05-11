@@ -1,48 +1,9 @@
 public class Utility implements IUtility {
 	@Override
 	public int[] generatePrimes(int totalPrimes) {
-		int primes[] = new int[totalPrimes + 1];
-		int ORDMAX = 30;
-		int MULT[] = new int[ORDMAX + 1];
-
-		int J;
-		int countPrime;
-		boolean isPrime;
-		int ORD;
-		int SQUARE;
-		J = 1;
-		countPrime = 1;
-		primes[1] = 2;
-		ORD = 2;
-		SQUARE = 9;
-		while (countPrime < totalPrimes) {
-			do {
-				J += 2;
-				if (J == SQUARE) {
-					ORD++;
-					SQUARE = primes[ORD] * primes[ORD];
-					MULT[ORD - 1] = J;
-				}
-				isPrime = true;
-				isPrime = validatePrime(primes, MULT, J, isPrime, ORD);
-			} while (!isPrime);
-			countPrime++;
-			primes[countPrime] = J;
-		}
-		return primes;
-	}
-
-	private boolean validatePrime(int[] primes, int[] MULT, int J, boolean isPrime, int ORD) {
-		for (int N = 2; N < ORD && isPrime; N++) {
-			while (MULT[N] < J) {
-				MULT[N] += primes[N] + primes[N];
-			}
-			if (MULT[N] == J) {
-				isPrime = false;
-				break;
-			}
-		}
-		return isPrime;
+		Prime prime = new Prime();
+		prime.setTotalPrimes(totalPrimes);
+		return prime.generate();
 	}
 
 	@Override
